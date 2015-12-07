@@ -1,0 +1,79 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+
+
+public class Solution {
+	public int solution(String S)  {
+		String[] lst = S.split("\n");
+		//ArrayList<String> lst = lstStr.
+		HashMap<String, Call> map = new HashMap<String, Call>();
+		int total=0;
+		int maxTime=0,maxCharges=0;
+		for (int i = 0; i < lst.length; i++) {
+			String callLog= lst[i];
+			String[] calll = callLog.split(",");
+			String[] time = calll[0].split(":");
+			Integer hr = Integer.parseInt(time[0]);
+			Integer min = Integer.parseInt(time[1]);
+			Integer sec = Integer.parseInt(time[2]);
+			//System.out.println(hr+" : "+min+ " : "+ sec);
+			String phNum = calll[1];
+			int totaltime = hr*60*60+min*60+sec;
+			int callCharge =0;
+			if(hr>0 || min >=5){
+			if(sec>0) min++;
+			int totalMin = hr*60 +min;
+			callCharge = totalMin*150;
+			//System.out.println("min : "+totalMin);
+			}
+			else {
+			int totalSec = min*60 + sec;
+			callCharge = totalSec*3 ;
+			//System.out.println("sec : "+totalSec);
+
+			}
+			//System.out.println(callCharge);
+			
+			if(map.containsKey(phNum)){
+			Call call= new Call();
+			call.totalCharges = map.get(phNum).totalCharges + callCharge;
+			call.totalTime = map.get(phNum).totalTime + totaltime;
+			if(call.totalTime > maxTime) {maxTime =call.totalTime;maxCharges = call.totalCharges; }
+			map.put(phNum,call );
+			}else{
+				Call call= new Call();
+				call.totalCharges =  callCharge;
+				call.totalTime = totaltime;
+				if(call.totalTime > maxTime) {maxTime =call.totalTime;maxCharges = call.totalCharges;}
+				map.put(phNum,call );
+				
+			}
+			total+=callCharge;
+			/*Pattern ptr = Pattern.compile("^([^,]*),([^,]*)$");
+			Matcher m = ptr.matcher(callLog);
+			while(m.find()){
+				System.out.println(m.group(0));
+			}*/
+		}
+		total=total-maxCharges;
+		return total;
+        // write your code in Java SE 8
+    }
+	public static void main(String[] args) {
+		/*ArrayList<String> lst = new ArrayList<String>(){{add("00:01:07,400-234-090");
+		add("00:05:01,701-080-080");
+		add("00:05:00,400-234-090");}};*/
+		String lst = "00:01:07,400-234-090 "
+				+ "\n"
+				+ "00:05:01,701-080-080"
+				+ "\n"
+				+ "00:05:00,400-234-090";
+
+		Solution s = new Solution();
+		System.out.println(s.solution(lst));
+	}
+}
+class Call{
+	int totalTime;
+	int totalCharges;
+}
