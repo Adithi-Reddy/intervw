@@ -1,0 +1,75 @@
+import java.util.ArrayList;
+
+
+public class Solution {
+		public void rotate(ArrayList<ArrayList<Integer>> a) {
+			int n= a.size();
+			for (int level = 0; level < n/2; level++) {
+				for (int i = level; i < n-level-1; i++) {
+					int temp = a.get(level).get(i);
+					System.out.println("("+(level)+","+(i)+")"+"->"+
+									   "("+(i)+","+(n-level-1)+")"+"->"+
+									   "("+(n-level-1)+","+(n-1-i)+")"+"->"+
+									   "("+(n-1-i)+","+level+")");
+					
+					
+					/*a.get(level).set(i,a.get(i).get(n-level-1));
+					a.get(i).set(n-level-1,a.get(n-level-1).get(n-level-i-1));
+					a.get(n-level-1).set(n-level-i-1,a.get(n-level-i-1).get(level));
+					a.get(n-level-i-1).set(level,temp);*/
+					
+					/*a.get(level).set(i,a.get(n-level-i-1).get(level));
+					a.get(n-level-i-1).set(level,a.get(n-level-1).get(n-i-1));
+					a.get(n-level-1).set(n-i-1,a.get(i).get(n-level-1));
+					a.get(i).set(n-level-1,temp);*/
+					a.get(level).set(i,a.get(n-i-1).get(level));
+					a.get(n-i-1).set(level,a.get(n-level-1).get(n-i-1));
+					a.get(n-level-1).set(n-i-1,a.get(i).get(n-level-1));
+					a.get(i).set(n-level-1,temp);
+					
+				}
+				for (int k = 0; k < a.size(); k++) {
+					for (int j = 0; j < a.get(0).size(); j++) {
+						System.err.print(a.get(k).get(j)+" ");
+						
+					}System.err.println();
+					
+				}
+			}
+		}
+	
+	public static void main(String[] args) {
+		/*final ArrayList<Integer> lst0 = new ArrayList<Integer>(){{add(1);add(2);}};
+		final ArrayList<Integer> lst1 = new ArrayList<Integer>(){{add(3);add(4);}};
+		final ArrayList<ArrayList<Integer>> lst = new ArrayList<ArrayList<Integer>>(){{add(lst0);add(lst1);}};*/
+		/*final ArrayList<Integer> lst0 = new ArrayList<Integer>(){{add(1);add(2);add(3);}};
+		final ArrayList<Integer> lst1 = new ArrayList<Integer>(){{add(4);add(5);add(6);}};
+		final ArrayList<Integer> lst2 = new ArrayList<Integer>(){{add(7);add(8);add(9);}};
+		final ArrayList<ArrayList<Integer>> lst = new ArrayList<ArrayList<Integer>>(){{add(lst0);add(lst1);add(lst2);}};*/
+		/*final ArrayList<Integer> lst0 = new ArrayList<Integer>(){{add(1);add(2);add(3);add(4);}};
+		final ArrayList<Integer> lst1 = new ArrayList<Integer>(){{add(5);add(6);add(7);add(8);}};
+		final ArrayList<Integer> lst2 = new ArrayList<Integer>(){{add(9);add(10);add(11);add(12);}};
+		final ArrayList<Integer> lst3 = new ArrayList<Integer>(){{add(13);add(14);add(15);add(16);}};
+		final ArrayList<ArrayList<Integer>> lst = new ArrayList<ArrayList<Integer>>(){{add(lst0);add(lst1);add(lst2);add(lst3);}};*/
+		/*final ArrayList<Integer> lst0 = new ArrayList<Integer>(){{add(1);add(2);add(3);add(4);add(5);}};
+		final ArrayList<Integer> lst1 = new ArrayList<Integer>(){{add(6);add(7);add(8);add(9);add(10);}};
+		final ArrayList<Integer> lst2 = new ArrayList<Integer>(){{add(11);add(12);add(13);add(14);add(15);}};
+		final ArrayList<Integer> lst3 = new ArrayList<Integer>(){{add(16);add(17);add(18);add(19);add(20);}};
+		final ArrayList<Integer> lst4 = new ArrayList<Integer>(){{add(21);add(22);add(23);add(24);add(25);}};
+		final ArrayList<ArrayList<Integer>> lst = new ArrayList<ArrayList<Integer>>(){{add(lst0);add(lst1);add(lst2);add(lst3);add(lst4);}};*/
+		final ArrayList<Integer> lst0 = new ArrayList<Integer>(){{add(1);add(2);add(3);add(4);}};
+		final ArrayList<Integer> lst1 = new ArrayList<Integer>(){{add(5);add(6);add(7);add(8);}};
+		final ArrayList<Integer> lst2 = new ArrayList<Integer>(){{add(9);add(10);add(11);add(12);}};
+		final ArrayList<Integer> lst3 = new ArrayList<Integer>(){{add(13);add(14);add(15);add(16);}};
+		final ArrayList<ArrayList<Integer>> lst = new ArrayList<ArrayList<Integer>>(){{add(lst0);add(lst1);add(lst2);add(lst3);}};
+		for (int i = 0; i < lst.size(); i++) {
+			for (int j = 0; j < lst.get(0).size(); j++) {
+				System.out.print(lst.get(i).get(j)+" ");
+				
+			}System.out.println();
+			
+		}
+		Solution s = new Solution();
+		s.rotate(lst);
+	}
+}
